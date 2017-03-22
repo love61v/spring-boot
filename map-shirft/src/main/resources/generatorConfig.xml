@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mybatis生成配置 -->
+<!-- 最后一行table元素中修改自己的要生成的表名及实体名称 -->
+<!--用法: 选择pom.xml文件，击右键先择Run AS——Maven Build… ——在Goals框中输入：mybatis-generator:generate——Run就好了,在工程上刷新-->
+
+<generatorConfiguration>
+  <context id="call" targetRuntime="MyBatis3">
+  
+  	<!-- 数据库连接信息 -->
+    <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://172.16.127.201:3306/kaikeba?useUnicode=true&amp;characterEncoding=utf-8"
+        userId="test"
+        password="Meihao100@bfbd">
+    </jdbcConnection> -->
+    
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql:///kaikeba?useUnicode=true&amp;characterEncoding=utf-8"
+        userId="root"
+        password="123456">
+    </jdbcConnection>
+
+	<!-- model实体类 -->
+	 <javaModelGenerator targetPackage="cn.yesway.mapshifting.model" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    
+    <!-- sql xml -->
+    <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- dao -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="cn.yesway.mapshifting.dao" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+	<!-- 表名, 生成的实体名 -->
+	<table tableName="country" domainObjectName="Country" 
+		enableDeleteByExample="false" enableDeleteByPrimaryKey="false"></table>
+
+</context>
+</generatorConfiguration>
+

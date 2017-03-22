@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+<title>Insert title here</title>
+</head>
+<body>
+   <div th:unless="${#lists.isEmpty(countryList)}">
+   	 <table>
+		  <tr th:each="country:${countryList}">
+		    <th><span th:text="${country.id}"></span></th>
+		    <th><span th:text="${country.countryname}"></span></th>
+		    <th><span th:text="${country.countrycode}"></span></th>
+		    <th><input type="button" th:onclick="'sendAjax('+${country.id}+');'"  value="show me"/></th>
+		    <th><input type="button" th:id="${country.id}" onclick="sendAjax2(this)"  value="show me2"/></th>
+		  </tr>
+		</table>
+   </div>
+</body>
+<script  type="text/javascript" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+
+<script>
+  function sendAjax(id){
+	$.ajax({
+		url: '/countries/country/'+ id, 
+		type: 'GET',
+		datetype: 'text',
+		success: function(data){
+			alert('名字:' + data.countryname);
+		}
+	});
+}
+  
+  function sendAjax2(obj){
+	  alert($(obj).attr('id'));
+  }
+</script>
+</html>

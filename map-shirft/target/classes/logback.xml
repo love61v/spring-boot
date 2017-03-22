@@ -1,0 +1,34 @@
+﻿<configuration  scan="true" scanPeriod="60 seconds">
+    <property name="LOG_HOME" value="${catalina.base}/logs" />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/output.log</file>
+        <append>true</append>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_HOME}/kaikeba.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2000MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level %logger[method:%M][line:%line] [%thread]-> %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level %logger[method:%M][line:%line] [%thread]-> %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="cn.yesway.mapshifting" level="info"/>
+    <logger name="org.springframework.web" level="info"/>
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

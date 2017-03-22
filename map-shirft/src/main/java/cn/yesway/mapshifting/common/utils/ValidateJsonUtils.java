@@ -2,11 +2,6 @@ package cn.yesway.mapshifting.common.utils;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 
 /**
  * json格式是否合法正则表达式
@@ -233,24 +228,4 @@ public class ValidateJsonUtils {
 	public static String replaceChar(String content){
 		return content.replace("\r", "").replace("\n", "").replace("\t", "");
 	}
-
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		String jsonStr = "{\"wgs84Positions\": {\"pos1\": {\"lat\":  40,\"lon\":  23.456},\"pos2\": {\"lat\":  140,\"lon\":  123.456}}}";
-		
-		/*System.out.println(jsonStr + ":"
-				+ ValidateJsonUtils.validate(jsonStr));*/
-		
-		 Gson gson = new Gson();
-		 TreeMap<String, Object> maps = gson.fromJson(jsonStr, TreeMap.class);
-		 LinkedTreeMap<String, Object> obj =  (LinkedTreeMap<String, Object>) maps.get("wgs84Positions");
-		 
-		 for(Entry<String, Object> entry : obj.entrySet()){
-			 LinkedTreeMap<String, Object> temp =  (LinkedTreeMap<String, Object>) entry.getValue();
-			 System.out.println(entry.getKey() + "\t==> " + temp.get("lat") + "\t" + temp.get("lon"));
-		 }
-		 
-		
-	}
-
 }
